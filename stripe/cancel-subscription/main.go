@@ -18,17 +18,9 @@ func main() {
 	}
 
 	if john, ok := customers["john.doe@example.com"]; ok {
-
-		// create a subscription
-		sub.New(&stripe.SubParams{
+		s := john.Subs.Values[0]
+		sub.Cancel(s.ID, &stripe.SubParams{
 			Customer: john.ID,
-			Plan:     "Premium Annual",
-			Card: &stripe.CardParams{
-				Number: "4242424242424242",
-				Month:  "12",
-				Year:   "2016",
-				CVC:    "123",
-			},
 		})
 	}
 
